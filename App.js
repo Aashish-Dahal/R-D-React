@@ -7,27 +7,31 @@
  */
 
 import React from 'react';
-import {StyleSheet, View, Text} from 'react-native';
+import {StyleSheet, View} from 'react-native';
+import {NavigationContainer} from '@react-navigation/native';
+import {createStackNavigator} from '@react-navigation/stack';
+import Home from './src/navigation/screens/Home';
+import Profile from './src/navigation/screens/Profile';
 
+const Stack = createStackNavigator();
 const App = () => {
   return (
-    <View style={styles.container}>
-      <Text style={styles.textStyle}> Demo App</Text>
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator
+        initialRouteName="Profile"
+        screenOptions={{
+          headerStyle: {backgroundColor: 'red'},
+        }}>
+        <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="Profile" component={Profile} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 };
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'white',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  textStyle: {
-    fontSize: 20,
-    color: 'black',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
 });
 
