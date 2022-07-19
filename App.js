@@ -7,33 +7,50 @@
  */
 
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
-import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import Home from './src/navigation/screens/Home';
-import Profile from './src/navigation/screens/Profile';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import Wishlist from './src/navigation/screens/wishlist';
-import Cart from './src/navigation/screens/cart';
 
-const Stack = createNativeStackNavigator();
+import {NavigationContainer} from '@react-navigation/native';
+
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import {createDrawerNavigator} from '@react-navigation/drawer';
+import Home from './src/navigation/screens/Home';
+import Wishlist from './src/navigation/screens/wishlist';
+
+const Drawer = createDrawerNavigator();
 const App = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Home" component={Home} />
-        <Stack.Screen name="Wishlist" component={Home} />
-        <Stack.Screen name="Profile" component={Home} />
-        <Stack.Screen name="Cart" component={Home} />
-      </Stack.Navigator>
+      <Drawer.Navigator
+        initialRouteName="Home"
+        screenOptions={{
+          headerStyle: {
+            backgroundColor: 'red',
+          },
+          drawerActiveBackgroundColor: 'red',
+          drawerActiveTintColor: 'white',
+          drawerStyle: {
+            width: 220,
+          },
+        }}>
+        <Drawer.Screen
+          name="Wishlist"
+          component={Wishlist}
+          options={{
+            drawerLabel: 'Home Screen',
+            drawerIcon: props => (
+              <MaterialCommunityIcons
+                name="home"
+                size={28}
+                color="white"
+                style={{paddingLeft: 10}}
+                onPress={() => console.log('Home Clicked')}
+              />
+            ),
+          }}
+        />
+        <Drawer.Screen name="Home" component={Home} />
+      </Drawer.Navigator>
     </NavigationContainer>
   );
 };
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'white',
-  },
-});
 
 export default App;
