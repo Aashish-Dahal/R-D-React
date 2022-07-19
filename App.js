@@ -11,44 +11,70 @@ import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import {createDrawerNavigator} from '@react-navigation/drawer';
+import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
 import Home from './src/navigation/screens/Home';
 import Wishlist from './src/navigation/screens/wishlist';
+import Cart from './src/navigation/screens/cart';
+import Profile from './src/navigation/screens/Profile';
 
-const Drawer = createDrawerNavigator();
+const Tab = createMaterialBottomTabNavigator();
 const App = () => {
   return (
     <NavigationContainer>
-      <Drawer.Navigator
+      <Tab.Navigator
         initialRouteName="Home"
         screenOptions={{
           headerStyle: {
             backgroundColor: 'red',
           },
-          drawerActiveBackgroundColor: 'red',
-          drawerActiveTintColor: 'white',
-          drawerStyle: {
-            width: 220,
+          tabBarStyle: {
+            backgroundColor: 'white',
+          },
+          tabBarLabelStyle: {
+            fontWeight: 'bold',
           },
         }}>
-        <Drawer.Screen
+        <Tab.Screen
+          name="Home"
+          component={Home}
+          options={{
+            tabBarIcon: () => (
+              <MaterialCommunityIcons name="home" color="white" size={20} />
+            ),
+          }}
+        />
+        <Tab.Screen
           name="Wishlist"
           component={Wishlist}
           options={{
-            drawerLabel: 'Home Screen',
-            drawerIcon: props => (
+            tabBarIcon: () => (
               <MaterialCommunityIcons
-                name="home"
-                size={28}
+                name="cards-heart"
                 color="white"
-                style={{paddingLeft: 10}}
-                onPress={() => console.log('Home Clicked')}
+                size={20}
               />
             ),
           }}
         />
-        <Drawer.Screen name="Home" component={Home} />
-      </Drawer.Navigator>
+        <Tab.Screen
+          name="Cart"
+          component={Cart}
+          options={{
+            tabBarIcon: () => (
+              <MaterialCommunityIcons name="cart" color="white" size={20} />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="Profile"
+          component={Profile}
+          options={{
+            tabBarIcon: () => (
+              <MaterialCommunityIcons name="account" color="white" size={20} />
+            ),
+          }}
+        />
+      </Tab.Navigator>
     </NavigationContainer>
   );
 };
