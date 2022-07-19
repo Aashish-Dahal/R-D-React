@@ -1,11 +1,24 @@
 import React from 'react';
+import {Text, StyleSheet, View} from 'react-native';
+import {Link} from '@react-navigation/native';
 
-import {Text, StyleSheet} from 'react-native';
 export default function Home() {
-  return <Text style={styles.textStyle}>Home Screen</Text>;
+  return (
+    <View>
+      <Text style={styles.textStyle}>Home Screen</Text>
+      <Link to={{screen: 'Profile'}} style={styles.link}>
+        {' '}
+        Go to Profile
+      </Link>
+    </View>
+  );
 }
 const styles = StyleSheet.create({
   textStyle: {
     color: 'black',
+  },
+  link: {
+    fontSize: 20,
+    color: 'red',
   },
 });
