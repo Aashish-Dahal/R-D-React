@@ -1,15 +1,20 @@
 import React from 'react';
-import {Text, StyleSheet, View} from 'react-native';
-import {Link} from '@react-navigation/native';
+import {Text, StyleSheet, View, Button} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
 
 export default function Home() {
+  const navigation = useNavigation();
   return (
     <View>
       <Text style={styles.textStyle}>Home Screen</Text>
-      <Link to={{screen: 'Profile'}} style={styles.link}>
-        {' '}
-        Go to Profile
-      </Link>
+      <Button
+        title="Go to Profile"
+        onPress={() => navigation.navigate('Profile')}
+      />
+      <Button
+        title="Go to Cart with params"
+        onPress={() => navigation.navigate('Cart', {id: 11})}
+      />
     </View>
   );
 }

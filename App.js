@@ -29,9 +29,8 @@ const App = () => {
           }}>
           <Stack.Screen name="Home" component={Home} />
           <Stack.Screen name="Wishlist" component={Wishlist} />
-          <Stack.Screen name="Cart" component={Cart} />
         </Stack.Group>
-
+        <Stack.Screen name="Cart" component={Cart} />
         <Stack.Screen name="Profile" component={Profile} />
       </Stack.Navigator>
     </NavigationContainer>
