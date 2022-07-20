@@ -1,10 +1,12 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   Text,
   StyleSheet,
   View,
   TouchableOpacity,
   TextInput,
+  Alert,
+  Keyboard,
   ScrollView,
 } from 'react-native';
 import * as eva from '@eva-design/eva';
@@ -13,6 +15,7 @@ import {EvaIconsPack} from '@ui-kitten/eva-icons';
 import * as Style from '../constants/styles/Styles';
 
 const Notes = ({navigation, ...props}) => {
+  const [searchNote, setSearchNote] = useState();
   function deleteNote(index) {
     let newArray = [...props.notes];
     let moveNote = newArray.splice(index, 1);
@@ -20,6 +23,34 @@ const Notes = ({navigation, ...props}) => {
     props.setMoveToBin(moveNote);
     let bin = [moveNote, ...props.moveToBin];
     props.setMoveToBin(bin);
+  }
+  function search() {
+    if (searchNote === '') {
+      Alert.alert('Type something in search box');
+    } else if (searchNote !== '') {
+      props.notes.forEach((item, index) => {
+        if (item.includes(searchNote)) {
+          let searchItem = [...props.notes];
+          let firstElofArray = searchItem[0];
+          let index = [...props.notes].indexOf(item);
+          searchItem[0] = item;
+          searchItem[index] = firstElofArray;
+          props.setNotes(searchItem);
+        }
+      });
+    }
+    setSearchNote('');
+    Keyboard.dismiss();
+  }
+  function clearAllNotes() {
+    let emptyArray = [...props.notes];
+    let deletedComArray = [...props.moveToBin];
+    emptyArray.forEach((item, index) => {
+      deletedComArray.push(item);
+    });
+    emptyArray = [];
+    props.setNotes(emptyArray);
+    props.setMoveToBin(deletedComArray);
   }
   return (
     <View style={styles.notesContainer}>
@@ -62,14 +93,20 @@ const Notes = ({navigation, ...props}) => {
         <TextInput
           placeholder="Search..."
           placeholderTextColor={Style.color}
-          style={[styles.input, {borderWidth: 3}]}></TextInput>
-        <TouchableOpacity style={[styles.searchButton, {width: 50}]}>
+          style={[styles.input, {borderWidth: 3}]}
+          value={searchNote}
+          onChangeText={text => setSearchNote(text)}></TextInput>
+        <TouchableOpacity
+          style={[styles.searchButton, {width: 50}]}
+          onPress={() => search()}>
           <IconRegistry icons={EvaIconsPack} />
           <ApplicationProvider {...eva} theme={eva.light}>
             <Icon name="search" fill="white" style={{width: 25, height: 40}} />
           </ApplicationProvider>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.searchButton}>
+        <TouchableOpacity
+          style={styles.searchButton}
+          onPress={() => clearAllNotes()}>
           <Text style={styles.searchButtonText}> Clear</Text>
         </TouchableOpacity>
       </View>
@@ -86,7 +123,7 @@ const Notes = ({navigation, ...props}) => {
               <View
                 style={{flexDirection: 'row', justifyContent: 'space-between'}}>
                 <View style={styles.note}>
-                  <Text style={styles.index}>{index1 + 1}</Text>
+                  <Text style={styles.index}>{index1 + 1}.</Text>
                   <Text style={styles.text}>{data}</Text>
                 </View>
                 <TouchableOpacity onPress={() => deleteNote(index1)}>
@@ -95,7 +132,13 @@ const Notes = ({navigation, ...props}) => {
               </View>
               <View style={styles.dateContainer}>
                 <Text style={{color: 'black'}}> {props.date}</Text>
-                <TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() =>
+                    navigation.navigate('EditNote', {
+                      i: index1,
+                      n: data,
+                    })
+                  }>
                   <Text style={styles.delete}>Edit</Text>
                 </TouchableOpacity>
               </View>

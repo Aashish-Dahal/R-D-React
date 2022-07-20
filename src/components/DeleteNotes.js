@@ -47,6 +47,26 @@ const DeleteNotes = ({...props}) => {
     newArray.splice(index, 1);
     props.setMoveToBin(newArray);
   }
+  function permanentlyDelete(index) {
+    Alert.alert(
+      'Delete All',
+      'Are You sure you want to permanently delete this item',
+      [
+        {
+          text: 'No',
+          onPress: () => console.log('No'),
+        },
+        {
+          text: 'yes',
+          onPress: () => {
+            let newArray = [...props.moveToBin];
+            newArray.splice(index, 1);
+            props.setMoveToBin(newArray);
+          },
+        },
+      ],
+    );
+  }
   return (
     <ScrollView>
       <View style={[styles.notesContainer]}>
@@ -62,7 +82,7 @@ const DeleteNotes = ({...props}) => {
             <Text style={styles.emptyButtonText}>Undo All</Text>
           </TouchableOpacity>
           <Text style={{fontWeight: '700', fontSize: 18, color: Style.color}}>
-            Total:
+            Total: {props.moveToBin.length}
           </Text>
           <TouchableOpacity
             style={style.emptyButton}
@@ -90,7 +110,7 @@ const DeleteNotes = ({...props}) => {
               </View>
               <View style={styles.dateContainer}>
                 <Text style={{color: 'black'}}>Date:</Text>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={() => permanentlyDelete(index)}>
                   <Text style={styles.delete}>Delete</Text>
                 </TouchableOpacity>
               </View>

@@ -14,6 +14,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import Notes from './src/components/Notes';
 import AddNote from './src/components/AddNote';
 import DeleteNotes from './src/components/DeleteNotes';
+import EditNote from './src/components/EditNote';
 
 const Stack = createNativeStackNavigator();
 
@@ -67,6 +68,9 @@ const App = () => {
               date={date}
             />
           )}
+        </Stack.Screen>
+        <Stack.Screen name="EditNote">
+          {props => <EditNote {...props} notes={notes} setNotes={setNotes} />}
         </Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>

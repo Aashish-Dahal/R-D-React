@@ -46,7 +46,8 @@ const AddNote = ({navigation, ...props}) => {
     </ScrollView>
   );
 };
-const styles = StyleSheet.create({
+export
+  const styles = StyleSheet.create({
   addContainer: {
     paddingHorizontal: 20,
     marginTop: 20,
