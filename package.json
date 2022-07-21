@@ -13,6 +13,7 @@
     "@react-navigation/native": "^6.0.11",
     "@react-navigation/native-stack": "^6.7.0",
     "react": "18.0.0",
+    "react-hook-form": "^7.33.1",
     "react-native": "0.69.1",
     "react-native-elements": "^3.4.2",
     "react-native-linear-gradient": "^2.6.2",
