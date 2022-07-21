@@ -1,80 +1,50 @@
 import React from 'react';
 
-import {Text, View, TextInput, TouchableOpacity, Image} from 'react-native';
+import {Text, View, TouchableOpacity} from 'react-native';
 import * as Color from '../../utils/style/Color';
 import {styles} from '../../utils/style/Styles';
 import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import ImageBox from '../customComponents/ImageBox';
+import RichText from '../customComponents/RichText';
+import InputField from '../customComponents/InputField';
+import GradientButton from '../customComponents/GradientButton';
 
-export default function RegisterScreen() {
+export default function RegisterScreen({navigation}) {
   return (
     <LinearGradient
       colors={[Color.darkBlue, Color.lightBlue]}
       style={styles.gradient}>
       <View style={styles.mainContainer}>
-        <Image
-          style={{
-            height: 140,
-            width: 140,
-          }}
-          source={{
-            uri: 'https://cdn.pixabay.com/photo/2014/12/22/00/07/tree-576847__480.png',
-          }}
+        <ImageBox height={140} width={140} />
+        <RichText
+          headingStyle={styles.heading}
+          subHeadingStyle={styles.subHeading}
+          heading="Register"
+          subHeading="Create your account"
         />
-        <Text style={styles.heading}>Register</Text>
-        <Text style={styles.bodySmall}>Create your account</Text>
-        <View style={styles.inputCard}>
-          <Icon
-            name="account"
-            size={20}
-            color={Color.darkBlue}
-            style={{marginLeft: 10, marginTop: 10, marginRight: 5}}></Icon>
-          <TextInput placeholder="Username" placeholderTextColor="#3e70b2" />
-        </View>
-        <View style={styles.inputCard}>
-          <Icon
-            name="email-outline"
-            size={20}
-            color={Color.darkBlue}
-            style={{marginLeft: 10, marginTop: 10, marginRight: 5}}></Icon>
-          <TextInput
-            placeholder="Email address"
-            placeholderTextColor="#3e70b2"
-          />
-        </View>
-        <View style={styles.inputCard}>
-          <Icon
-            name="lock-outline"
-            size={20}
-            color={Color.darkBlue}
-            style={{marginLeft: 10, marginTop: 10, marginRight: 5}}></Icon>
-          <TextInput
-            placeholder="Password"
-            placeholderTextColor="#3e70b2"
-            secureTextEntry={true}
-          />
-        </View>
-        <View style={styles.inputCard}>
-          <Icon
-            name="lock-outline"
-            size={20}
-            color={Color.darkBlue}
-            style={{marginLeft: 10, marginTop: 10, marginRight: 5}}></Icon>
-          <TextInput
-            placeholder="Confirm password"
-            placeholderTextColor="#3e70b2"
-            secureTextEntry={true}
-          />
-        </View>
-        <LinearGradient
-          start={{x: 0, y: 0.0}}
-          end={{x: 1, y: 0}}
-          colors={['#293959', '#3b4d92']}
-          style={styles.gradientButton}>
-          <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-            <Text>Register</Text>
-          </TouchableOpacity>
-        </LinearGradient>
+        <InputField iconName="account" placeholder="Username"></InputField>
+        <InputField
+          iconName="email-outline"
+          placeholder="Email address"></InputField>
+        <InputField iconName="lock-outline" placeholder="Password"></InputField>
+        <InputField
+          iconName="lock-outline"
+          placeholder="Confirm password"></InputField>
+        <Text style={{fontSize: 14, textAlign: 'center', marginTop: 10}}>
+          By registering,you are agreeing to our Terms of use and{'\n'} Privacy
+          Policy.
+        </Text>
+
+        <GradientButton text="REGISTER" />
+        <RichText
+          onPress={() => navigation.navigate('Login')}
+          disabled={false}
+          headingStyle={styles.text}
+          subHeadingStyle={styles.subText}
+          flexDirection="row"
+          heading="Already have an account?"
+          subHeading="Login"></RichText>
       </View>
     </LinearGradient>
   );
