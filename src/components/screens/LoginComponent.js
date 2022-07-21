@@ -1,58 +1,48 @@
 import React from 'react';
 
-import {Text, View, TextInput, TouchableOpacity, Image} from 'react-native';
+import {View, ScrollView} from 'react-native';
 import * as Color from '../../utils/style/Color';
 import {styles} from '../../utils/style/Styles';
 import LinearGradient from 'react-native-linear-gradient';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-export default function LoginScreen() {
+import InputField from '../customComponents/InputField';
+import RichText from '../customComponents/RichText';
+import ImageBox from '../customComponents/ImageBox';
+import GradientButton from '../customComponents/GradientButton';
+import CheckBoxTile from '../customComponents/CheckBoxTile';
+
+export default function LoginScreen({navigation}) {
   return (
     <LinearGradient
       colors={[Color.darkBlue, Color.lightBlue]}
       style={styles.gradient}>
-      <View style={styles.mainContainer}>
-        <Image
-          style={{
-            height: 180,
-            width: 180,
-          }}
-          source={{
-            uri: 'https://cdn.pixabay.com/photo/2014/12/22/00/07/tree-576847__480.png',
-          }}
-        />
-        <Text style={styles.heading}>Welcome Back</Text>
-        <Text style={styles.bodySmall}>Login to your account</Text>
-        <View style={styles.inputCard}>
-          <Icon
-            name="email-outline"
-            size={20}
-            color={Color.darkBlue}
-            style={{marginLeft: 10, marginTop: 10, marginRight: 5}}></Icon>
-          <TextInput placeholder="Username" placeholderTextColor="#3e70b2" />
-        </View>
-        <View style={styles.inputCard}>
-          <Icon
-            name="lock-outline"
-            size={20}
-            color={Color.darkBlue}
-            style={{marginLeft: 10, marginTop: 10, marginRight: 5}}></Icon>
-          <TextInput
+      <ScrollView>
+        <View style={styles.mainContainer}>
+          <ImageBox />
+          <RichText
+            headingStyle={styles.heading}
+            subHeadingStyle={styles.subHeading}
+            heading="Welcome Back"
+            subHeading="Login to your account"></RichText>
+          <InputField
+            iconName="email-outline"
+            placeholder="Username"></InputField>
+          <InputField
+            iconName="lock-outline"
             placeholder="Password"
-            placeholderTextColor="#3e70b2"
-            secureTextEntry={true}
-          />
+            secureTextEntry={true}></InputField>
+          <CheckBoxTile trailing="Forgot Password?" />
+          <GradientButton text="LOGIN" />
+          <RichText
+            onPress={() => navigation.navigate('Register')}
+            disabled={false}
+            headingStyle={styles.text}
+            subHeadingStyle={styles.subText}
+            flexDirection="row"
+            heading="Don't have an account?"
+            subHeading="Sign up"></RichText>
         </View>
-        <LinearGradient
-          start={{x: 0, y: 0.0}}
-          end={{x: 1, y: 0}}
-          colors={['#293959', '#3b4d92']}
-          style={styles.gradientButton}>
-          <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-            <Text>LOGIN</Text>
-          </TouchableOpacity>
-        </LinearGradient>
-      </View>
+      </ScrollView>
     </LinearGradient>
   );
 }
