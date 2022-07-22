@@ -8,19 +8,11 @@ const InputField = ({
   control,
   name,
   rules = {},
-  setValue,
   placeholder,
   secureTextEntry,
   iconName,
 }) => {
   return (
-    // <View style={styles.inputCard}>
-    //   <Icon
-    //     name={iconName}
-    //     size={20}
-    //     color={Color.darkBlue}
-    //     style={styles.icon}></Icon>
-
     <Controller
       control={control}
       rules={rules}
@@ -36,9 +28,9 @@ const InputField = ({
               style={styles.icon}></Icon>
             <TextInput
               value={value}
+              onChangeText={onChange}
               onBlur={onBlur}
               placeholder={placeholder}
-              onChangeText={setValue}
               style={{color: 'black'}}
               placeholderTextColor="#3e70b2"
               secureTextEntry={secureTextEntry}
