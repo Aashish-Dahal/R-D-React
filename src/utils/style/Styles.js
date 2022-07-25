@@ -18,7 +18,7 @@ export const styles = StyleSheet.create({
     width: '80%',
     height: 45,
     marginBottom: 0,
-   
+
     borderWidth: 1,
     borderRadius: 8,
   },
@@ -30,6 +30,10 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  homeContainer: {
+    flex: 1,
+    flexDirection: 'column',
+  },
   heading: {
     fontSize: 40,
     color: 'white',
@@ -40,7 +44,7 @@ export const styles = StyleSheet.create({
   },
   gradientButton: {
     marginBottom: 20,
-    marginTop: 80,
+    marginTop: 20,
     borderRadius: 100,
     elevation: 5,
     width: 250,
@@ -93,5 +97,35 @@ export const styles = StyleSheet.create({
     marginHorizontal: 0,
     backgroundColor: 'transparent',
     borderColor: 'transparent',
+  },
+  floatingButton: {
+    width: 60,
+    bottom: 0,
+    right: 0,
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    display: 'flex',
+    height: 60,
+    marginRight: 15,
+    marginBottom: 15,
+    elevation: 8,
+    position: 'absolute',
+    backgroundColor: 'blue',
+    borderRadius: 100,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  container: {
+    flexDirection: 'row',
+    marginTop: 10,
+    marginHorizontal: 10,
+
+    borderRadius: 10,
+    backgroundColor: '#C7CDEC',
+
+    borderColor: 'white',
+    borderWidth: 1,
   },
 });
