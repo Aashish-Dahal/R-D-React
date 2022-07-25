@@ -7,6 +7,7 @@ import {Controller} from 'react-hook-form';
 const InputField = ({
   control,
   name,
+  width,
   rules = {},
   placeholder,
   secureTextEntry,
@@ -20,7 +21,11 @@ const InputField = ({
       render={({field: {value, onChange, onBlur}, fieldState: {error}}) => (
         <>
           <View
-            style={[styles.inputCard, {borderColor: error ? 'red' : 'white'}]}>
+            style={[
+              styles.inputCard,
+              {borderColor: error ? 'red' : 'white'},
+              {width: width || '80%'},
+            ]}>
             <Icon
               name={iconName}
               size={20}
