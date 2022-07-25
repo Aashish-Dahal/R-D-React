@@ -8,6 +8,8 @@ import LoginScreen from './src/components/screens/LoginComponent';
 import RegisterScreen from './src/components/screens/RegisterComponent';
 import HomeScreen from './src/components/screens/HomeComponent';
 import auth from '@react-native-firebase/auth';
+import AddScreen from './src/components/screens/AddScreen';
+import EditScreen from './src/components/screens/EditScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -15,6 +17,7 @@ const App = () => {
   // Set an initializing state whilst Firebase connects
   const [initializing, setInitializing] = useState(true);
   const [user, setUser] = useState();
+  const [note, setNote] = useState([]);
 
   // Handle user state changes
   function onAuthStateChanged(user) {
@@ -47,7 +50,24 @@ const App = () => {
     }
     return (
       <Stack.Navigator>
-        <Stack.Screen name="Home" component={HomeScreen}></Stack.Screen>
+        <Stack.Screen
+          options={{
+            title: 'My Notes',
+          }}
+          name="Home"
+          component={HomeScreen}></Stack.Screen>
+        <Stack.Screen
+          options={{
+            title: 'Add Note',
+          }}
+          name="Add"
+          component={AddScreen}></Stack.Screen>
+        <Stack.Screen
+          options={{
+            title: 'Edit Note',
+          }}
+          name="Edit"
+          component={EditScreen}></Stack.Screen>
       </Stack.Navigator>
     );
   };
